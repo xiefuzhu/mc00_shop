@@ -10,6 +10,11 @@ class CartView extends StatefulWidget {
 class _CartViewState extends State<CartView> {
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text("购物车"));
+    return Center(
+      child: Text(
+        "购物车",
+        style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+      ),
+    );
   }
 }

@@ -14,25 +14,25 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   //定义数据,根据数据进行渲染的4个导航
   //一般应用的导航是固定的
-  final List<Map<String, String>> _tapList = [
+  final List<Map<String, dynamic>> _tapList = [
     {
-      "icon": "lib/assets/ic_public_home_normal.png", //正常显示的图标
-      "active_icon": "lib/assets/ic_public_home_active.png", //激活状态
+      "icon": Icons.home_outlined, //正常显示的图标
+      "active_icon": Icons.home, //激活状态
       "text": "首页",
     },
     {
-      "icon": "lib/assets/ic_public_pro_normal.png", //正常显示的图标
-      "active_icon": "lib/assets/ic_public_pro_active.png", //激活状态
+      "icon": Icons.category_outlined, //正常显示的图标
+      "active_icon": Icons.category, //激活状态
       "text": "分类",
     },
     {
-      "icon": "lib/assets/ic_public_cart_normal.png", //正常显示的图标
-      "active_icon": "lib/assets/ic_public_cart_active.png", //激活状态
+      "icon": Icons.shopping_cart_outlined, //正常显示的图标
+      "active_icon": Icons.shopping_cart, //激活状态
       "text": "购物车",
     },
     {
-      "icon": "lib/assets/ic_public_my_normal.png", //正常显示的图标
-      "active_icon": "lib/assets/ic_public_my_active.png", //激活状态
+      "icon": Icons.person_outline, //正常显示的图标
+      "active_icon": Icons.person, //激活状态
       "text": "我的",
     },
   ];
@@ -42,16 +42,8 @@ class _MainPageState extends State<MainPage> {
   List<BottomNavigationBarItem> _getTabBarWidget() {
     return List.generate(4, (int index) {
       return BottomNavigationBarItem(
-        icon: Image.asset(
-          _tapList[index]["icon"]!,
-          width: 30,
-          height: 30,
-        ), //正常图标
-        activeIcon: Image.asset(
-          _tapList[index]["active_icon"]!,
-          width: 30,
-          height: 30,
-        ), //激活图标
+        icon: Icon(_tapList[index]["icon"]!, size: 30), //正常图标
+        activeIcon: Icon(_tapList[index]["active_icon"]!, size: 30), //激活图标
         label: _tapList[index]["text"], //文本
       );
     });
@@ -72,9 +64,9 @@ class _MainPageState extends State<MainPage> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         showUnselectedLabels: true, //显示未选中时的文本
-        selectedItemColor: Colors.blueAccent, //选中时的颜色
-        unselectedItemColor: Colors.black, //未选中时的图标颜色
+
         onTap: (int index) {
           _currentIndex = index; //更新当前激活的索引
           setState(() {}); //刷新页面
