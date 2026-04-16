@@ -4,6 +4,7 @@ import 'package:mc00_shop/components/Home/MC00Hot.dart';
 import 'package:mc00_shop/components/Home/MC00MoreList.dart';
 import 'package:mc00_shop/components/Home/MC00Recommend.dart';
 import 'package:mc00_shop/components/Home/MC00Slider.dart';
+import 'package:mc00_shop/viewmodels/home.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -13,9 +14,25 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  late final List<BannerItem> _bannerlist;
+
+  @override
+  void initState() {
+    super.initState();
+    final int batchSeed = DateTime.now().millisecondsSinceEpoch;
+    _bannerlist = List.generate(10, (index) {
+      final int id = index + 1;
+      return BannerItem(
+        id: '$id',
+        code: '200',
+        imageUrl: 'https://www.dmoe.cc/random.php?seed=${batchSeed}_$id',
+      );
+    });
+  }
+
   List<Widget> _getScrollChildren() {
     return [
-      SliverToBoxAdapter(child: Mc00slider()), //轮播图
+      SliverToBoxAdapter(child: Mc00slider(bannerlist: _bannerlist)), //轮播图
       SliverToBoxAdapter(child: SizedBox(height: 20)), //间距
       SliverToBoxAdapter(child: Mc00category()), //分类
       SliverToBoxAdapter(child: SizedBox(height: 20)), //间距
