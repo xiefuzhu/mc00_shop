@@ -10,13 +10,16 @@ class Mc00recommend extends StatefulWidget {
 class _Mc00recommendState extends State<Mc00recommend> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 200,
-      child: Text(
-        "推荐",
-        style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 10),
+      child: Container(
+        height: 200,
+        child: Text(
+          "推荐",
+          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+        ),
+        color: Colors.red,
       ),
-      color: Colors.red,
     );
   }
 }

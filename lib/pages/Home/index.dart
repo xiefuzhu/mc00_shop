@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mc00_shop/components/Home/MC00Category.dart';
 import 'package:mc00_shop/components/Home/MC00Hot.dart';
+import 'package:mc00_shop/components/Home/MC00MoreList.dart';
 import 'package:mc00_shop/components/Home/MC00Recommend.dart';
 import 'package:mc00_shop/components/Home/MC00Slider.dart';
 
@@ -20,16 +21,25 @@ class _HomeViewState extends State<HomeView> {
       SliverToBoxAdapter(child: SizedBox(height: 20)), //间距
       SliverToBoxAdapter(child: Mc00recommend()), //推荐
       SliverToBoxAdapter(child: SizedBox(height: 20)), //间距
+
       SliverToBoxAdapter(
-        child: Flex(
-          direction: Axis.horizontal,
-          children: [
-            Expanded(child: Mc00hot()),
-            SizedBox(width: 10),
-            Expanded(child: Mc00hot()),
-          ],
-        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          child: Flex(
+            direction: Axis.horizontal,
+            children: [
+              Expanded(child: Mc00hot()),
+              SizedBox(width: 10),
+              Expanded(child: Mc00hot()),
+            ],
+          ),
+        ), //爆款推荐
       ),
+      SliverToBoxAdapter(child: SizedBox(height: 10)), //间距
+      SliverPadding(
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        sliver: Mc00morelist(),
+      ), //无限滚动
     ];
   }
 
