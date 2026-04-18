@@ -14,6 +14,7 @@ class Mc00slider extends StatefulWidget {
 
 class _Mc00sliderState extends State<Mc00slider> {
   CarouselSliderController _controller = CarouselSliderController();
+  int _currentIndex = 0; //当前激活的索引
   Widget _getSlider() {
     //轮播图插件
     return CarouselSlider(
@@ -28,6 +29,11 @@ class _Mc00sliderState extends State<Mc00slider> {
         viewportFraction: 1,
         autoPlay: true,
         height: MediaQuery.sizeOf(context).height * 0.33,
+        onPageChanged: (int index, reason) {
+          _currentIndex = index;
+          setState(() {}); //更新状态,重新渲染页面,显示当前激活的索引
+          //页面改变回调
+        },
       ),
     );
   }
@@ -48,13 +54,16 @@ class _Mc00sliderState extends State<Mc00slider> {
               onTap: () {
                 _controller.animateToPage(index);
               },
-              child: Container(
+              child: AnimatedContainer(
+                duration: Duration(milliseconds: 300), //动画持续时间
                 height: 6,
-                width: 40,
+                width: index == _currentIndex ? 16 : 6,
 
                 margin: EdgeInsets.symmetric(horizontal: 4),
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: index == _currentIndex
+                      ? Theme.of(context).colorScheme.primary
+                      : const Color.fromARGB(255, 255, 255, 255).withAlpha(150),
                   borderRadius: BorderRadius.circular(3),
                 ),
               ),
