@@ -3,6 +3,7 @@ import 'package:mc00_shop/pages/Cart/index.dart';
 import 'package:mc00_shop/pages/Category/index.dart';
 import 'package:mc00_shop/pages/Home/index.dart';
 import 'package:mc00_shop/pages/Mine/index.dart';
+import 'package:window_manager/window_manager.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -56,7 +57,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("MC00_Shop")),
+      appBar: _appBar(context),
       body: SafeArea(
         child: IndexedStack(
           index: _currentIndex, //根据当前激活的索引显示对应的组件
@@ -76,4 +77,53 @@ class _MainPageState extends State<MainPage> {
       ),
     );
   }
+}
+
+AppBar _appBar(BuildContext context) {
+  return AppBar(
+    flexibleSpace: GestureDetector(
+      onDoubleTap: () async {
+        if (await windowManager.isMaximized()) {
+          windowManager.restore();
+        } else {
+          windowManager.maximize();
+        }
+      },
+      onPanStart: (_) {
+        windowManager.startDragging();
+      },
+      child: Container(
+        color: Theme.of(context).colorScheme.inversePrimary.withAlpha(250),
+        alignment: Alignment.centerLeft,
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        child: Text("MC00_Shop", style: TextStyle(fontSize: 20)),
+      ),
+    ),
+    backgroundColor: Colors.transparent,
+    toolbarHeight: 35,
+    actions: [
+      IconButton(
+        onPressed: () {
+          windowManager.minimize();
+        },
+        icon: Icon(Icons.horizontal_rule, size: 20),
+      ),
+      IconButton(
+        onPressed: () async {
+          if (await windowManager.isMaximized()) {
+            windowManager.restore();
+          } else {
+            windowManager.maximize();
+          }
+        },
+        icon: Icon(Icons.crop_square, size: 20),
+      ),
+      IconButton(
+        onPressed: () {
+          windowManager.close();
+        },
+        icon: Icon(Icons.close, size: 20),
+      ),
+    ],
+  );
 }

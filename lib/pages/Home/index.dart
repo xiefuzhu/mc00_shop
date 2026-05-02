@@ -24,8 +24,7 @@ class _HomeViewState extends State<HomeView> {
       final int id = index + 1;
       return BannerItem(
         id: '$id',
-        code: '200',
-        imageUrl: 'https://www.dmoe.cc/random.php?seed=${batchSeed}_$id',
+        imageUrl: 'https://www.loliapi.com/acg/pc/?seed=${batchSeed}_$id',
       );
     });
   }

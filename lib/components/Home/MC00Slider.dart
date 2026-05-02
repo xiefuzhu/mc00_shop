@@ -28,6 +28,7 @@ class _Mc00sliderState extends State<Mc00slider> {
       options: CarouselOptions(
         viewportFraction: 1,
         autoPlay: true,
+        autoPlayInterval: Duration(milliseconds: 2000),
         height: MediaQuery.sizeOf(context).height * 0.33,
         onPageChanged: (int index, reason) {
           _currentIndex = index;
